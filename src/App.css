@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --aniwatch-purple: #8d09e5;
+  --aniwatch-black: #141414;
+  --aniwatch-dark-gray: #181818;
+  --aniwatch-medium-gray: #2f2f2f;
+  --aniwatch-light-gray: #808080;
+  --aniwatch-white: #ffffff;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--aniwatch-black);
+  color: var(--aniwatch-white);
+  overflow-x: hidden;
+}
+
+.dark {
+  --background: var(--aniwatch-black);
+  --foreground: var(--aniwatch-white);
+  --card: var(--aniwatch-dark-gray);
+  --primary: var(--aniwatch-purple);
+  --primary-foreground: var(--aniwatch-white);
+  --muted: var(--aniwatch-medium-gray);
+  --muted-foreground: var(--aniwatch-light-gray);
+  --border: var(--aniwatch-medium-gray);
+}
+
+/* aniwatch-style card hover effect */
+.anime-card {
+  transition: all 0.3s ease;
+}
+
+.anime-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+/* aniwatch-style scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--aniwatch-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--aniwatch-medium-gray);
+  border-radius: 4px;
+}
+
+/* Hero section fade effect */
+.hero-gradient {
+  background: linear-gradient(
+    to top,
+    var(--aniwatch-black) 0%,
+    transparent 100%
+  );
+}
+
+/* Poster hover effect */
+.poster-hover {
+  transition: all 0.3s ease;
+}
+
+.poster-hover:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(178, 9, 229, 0.3);
+}
