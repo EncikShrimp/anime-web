@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { useAnimeSearch } from "@/hooks/useAnimeSearch";
 import { useFeaturedAnime } from "@/hooks/useFeaturedAnime";
 import {
@@ -11,6 +11,10 @@ import {
 } from "@/components";
 
 const SearchPage: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const {
     query,
     setQuery,
@@ -56,7 +60,7 @@ const SearchPage: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Search controls */}
-        <SearchHeader query={query} setQuery={setQuery} onReset={onReset} />
+        {<SearchHeader query={query} setQuery={setQuery} onReset={onReset} />}
 
         {/* Loading state */}
         {loading && (

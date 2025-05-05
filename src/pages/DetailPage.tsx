@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import { useEffect } from "react";
 import { useAnimeDetail } from "@/hooks/useAnimeDetail";
 import { useAnimeMetadata } from "@/hooks/useAnimeMetadata";
 import {
@@ -11,6 +12,10 @@ import {
 } from "@/components";
 
 const DetailPage: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 1000);
+  }, []);
+
   const { id } = useParams<{ id: string }>();
   const { anime, loading, error } = useAnimeDetail(id);
   useAnimeMetadata(anime);
