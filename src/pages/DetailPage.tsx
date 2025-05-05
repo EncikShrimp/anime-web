@@ -16,13 +16,13 @@ const DetailPage: React.FC = () => {
   const { anime, loading, error } = useAnimeDetail(id);
   useAnimeMetadata(anime);
 
-  if (error === "NOT_FOUND") {
-    return <AnimeNotFound />;
-  }
-
   useEffect(() => {
     window.scrollTo(0, 1000);
   }, []);
+
+  if (error === "NOT_FOUND") {
+    return <AnimeNotFound />;
+  }
 
   return (
     <div className="min-h-screen bg-background">

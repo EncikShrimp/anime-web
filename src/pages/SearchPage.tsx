@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAnimeSearch } from "@/hooks/useAnimeSearch";
 import { useFeaturedAnime } from "@/hooks/useFeaturedAnime";
 import {
@@ -11,6 +11,7 @@ import {
 } from "@/components";
 
 const SearchPage: React.FC = () => {
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const {
     query,
     setQuery,
@@ -47,9 +48,23 @@ const SearchPage: React.FC = () => {
     [setPageSize, setPage]
   );
 
+  const handleSetQuery = useCallback(
+    (newQuery: string) => {
+      setIsInitialLoad(false);
+      setQuery(newQuery);
+    },
+    [setQuery]
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (!loading && isInitialLoad && results.length > 0) {
+      setIsInitialLoad(false);
+    }
+  }, [loading, results, isInitialLoad]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -60,7 +75,13 @@ const SearchPage: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Search controls */}
-        {<SearchHeader query={query} setQuery={setQuery} onReset={onReset} />}
+        {(!loading || !isInitialLoad) && (
+          <SearchHeader
+            query={query}
+            setQuery={handleSetQuery}
+            onReset={onReset}
+          />
+        )}
 
         {/* Loading state */}
         {loading && (
