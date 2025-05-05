@@ -1,7 +1,7 @@
-// src/hooks/useAnimeSearch.ts
 import { useState, useEffect, useCallback } from "react";
 import { useDebounce } from "./useDebounce";
-import { searchAnime, fetchPopularAnime, Anime } from "@/api/jikan";
+import { searchAnime, fetchPopularAnime } from "@/api/jikan";
+import { Anime } from "@/types/api";
 
 export function useAnimeSearch(initialPageSize = 10) {
   const [query, setQuery] = useState("");
@@ -12,11 +12,12 @@ export function useAnimeSearch(initialPageSize = 10) {
   const [results, setResults] = useState<Anime[]>([]);
   const [lastPage, setLastPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Reset search back to popular
   const reset = useCallback(() => {
+    setResults([]);
+    setLoading(true);
     setQuery("");
     setPage(1);
   }, []);

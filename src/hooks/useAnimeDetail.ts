@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { getAnimeById, AnimeDetail } from "@/api/jikan";
+import { getAnimeById } from "@/api/jikan";
+import { AnimeDetail } from "@/types/api";
 
 export function useAnimeDetail(id: string | undefined) {
   const [anime, setAnime] = useState<AnimeDetail | null>(null);

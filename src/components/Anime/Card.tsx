@@ -1,15 +1,16 @@
+import { Anime } from "@/types/api";
 import { useNavigate } from "react-router";
 
-interface AnimeCardProps {
-  anime: import("@/api/jikan").Anime;
+interface Props {
+  anime: Anime;
 }
 
-export default function AnimeCard({ anime }: AnimeCardProps) {
+const AnimeCard: React.FC<Props> = ({ anime }) => {
   const navigate = useNavigate();
 
   return (
     <div
-      className="anime-card cursor-pointer relative overflow-hidden rounded-md"
+      className="transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:z-10 cursor-pointer relative overflow-hidden rounded-md"
       onClick={() => navigate(`/anime/${anime.mal_id}`)}
     >
       <div className="aspect-[2/3] relative group">
@@ -36,4 +37,6 @@ export default function AnimeCard({ anime }: AnimeCardProps) {
       </div>
     </div>
   );
-}
+};
+
+export default AnimeCard;

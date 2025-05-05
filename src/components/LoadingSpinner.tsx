@@ -1,8 +1,8 @@
-"use client";
 import Lottie from "lottie-react";
 import loadingAnimation from "@/assets/lottie/loading.json";
+import React from "react";
 
-export default function LoadingSpinner() {
+const LoadingSpinner: React.FC = () => {
   return (
     <div className="flex justify-center items-center min-h-[50vh] py-8">
       <div className="relative">
@@ -13,4 +13,6 @@ export default function LoadingSpinner() {
       </div>
     </div>
   );
-}
+};
+
+export default LoadingSpinner;

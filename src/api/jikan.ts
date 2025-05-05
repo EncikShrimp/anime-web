@@ -1,67 +1,58 @@
-export interface Anime {
-  mal_id: number;
-  title: string;
-  score: number;
-  images: {
-    jpg: { image_url: string };
-  };
-}
+import { AnimeDetail, SearchResult } from "@/types/api";
 
-export interface Pagination {
-  last_visible_page: number;
-  items: {
-    count: number; // items on this page
-    total: number; // total matching items
-    per_page: number; // your limit
-  };
-}
+const API_DELAY = 300;
+let lastRequestTime = 0;
 
-export interface SearchResult {
-  data: Anime[];
-  pagination: Pagination;
-}
+async function makeJikanRequest(url: string, retries = 3): Promise<any> {
+  const now = Date.now();
+  const timeSinceLastRequest = now - lastRequestTime;
 
-export interface AnimeDetail {
-  mal_id: number;
-  title: string;
-  images: {
-    jpg: { image_url: string };
-    webp: { large_image_url: string };
-  };
-  synopsis: string;
-  score: number;
-  rank: number;
-  popularity: number;
-  members: number;
-  year: number;
-  rating: string;
-  status: string;
-  background: string;
-  genres: { mal_id: number; name: string }[];
-  type: string;
-  episodes: number;
-  duration: string;
-  season: string;
-  // you can add more fields here if you like, e.g.:
-  // episodes: number;
-  // duration: string;
-  // genres: { mal_id: number; name: string }[];
-  // trailer: { youtube_id: string; url: string };
+  if (timeSinceLastRequest < API_DELAY) {
+    await new Promise((resolve) =>
+      setTimeout(resolve, API_DELAY - timeSinceLastRequest)
+    );
+  }
+
+  lastRequestTime = Date.now();
+
+  try {
+    const response = await fetch(url);
+
+    if (response.status === 429 && retries > 0) {
+      console.log(`Rate limited, retrying in ${API_DELAY * 2}ms...`);
+      await new Promise((resolve) => setTimeout(resolve, API_DELAY * 2));
+      return makeJikanRequest(url, retries - 1);
+    }
+
+    if (response.status === 404) {
+      throw new Error("NOT_FOUND");
+    }
+
+    if (!response.ok) {
+      throw new Error(`API Error: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    if (
+      retries > 0 &&
+      error instanceof Error &&
+      !error.message.includes("NOT_FOUND")
+    ) {
+      console.log(`Request failed, retrying (${retries} attempts left)...`);
+      await new Promise((resolve) => setTimeout(resolve, API_DELAY));
+      return makeJikanRequest(url, retries - 1);
+    }
+    throw error;
+  }
 }
 
 export async function getAnimeById(
   id: string | undefined
 ): Promise<AnimeDetail> {
-  const res = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
-  if (res.status === 404) {
-    throw new Error("NOT_FOUND");
-  }
-  if (!res.ok) {
-    throw new Error(`API Error: ${res.status}`);
-  }
+  if (!id) throw new Error("ID is required");
 
-  // Jikan wraps the detail in a `data` property
-  const json = (await res.json()) as { data: AnimeDetail };
+  const json = await makeJikanRequest(`https://api.jikan.moe/v4/anime/${id}`);
   return json.data;
 }
 
@@ -70,22 +61,18 @@ export async function searchAnime(
   page: number,
   limit: number
 ): Promise<SearchResult> {
-  const res = await fetch(
+  return makeJikanRequest(
     `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(
       query
     )}&page=${page}&limit=${limit}`
   );
-  if (!res.ok) throw new Error(`API Error: ${res.status}`);
-  return res.json();
 }
 
 export async function fetchPopularAnime(
   page: number,
   limit: number
 ): Promise<SearchResult> {
-  const res = await fetch(
+  return makeJikanRequest(
     `https://api.jikan.moe/v4/top/anime?page=${page}&limit=${limit}`
   );
-  if (!res.ok) throw new Error(`API Error: ${res.status}`);
-  return res.json();
 }

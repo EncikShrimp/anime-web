@@ -27,18 +27,6 @@ body {
   --border: var(--aniwatch-medium-gray);
 }
 
-/* aniwatch-style card hover effect */
-.anime-card {
-  transition: all 0.3s ease;
-}
-
-.anime-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  z-index: 10;
-}
-
-/* aniwatch-style scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   background: var(--aniwatch-black);
@@ -49,21 +37,3 @@ body {
   border-radius: 4px;
 }
 
-/* Hero section fade effect */
-.hero-gradient {
-  background: linear-gradient(
-    to top,
-    var(--aniwatch-black) 0%,
-    transparent 100%
-  );
-}
-
-/* Poster hover effect */
-.poster-hover {
-  transition: all 0.3s ease;
-}
-
-.poster-hover:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px rgba(178, 9, 229, 0.3);
-}

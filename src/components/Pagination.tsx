@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -9,24 +7,25 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface PaginationProps {
+interface Props {
   current: number;
-  total: number; 
-  pageSize: number; 
-  totalItems: number; 
+  total: number;
+  pageSize: number;
+  totalItems: number;
   onPageChange: (p: number) => void;
   onPageSizeChange: (size: number) => void;
 }
 
-export default function Pagination({
+const Pagination: React.FC<Props> = ({
   current,
   total,
   pageSize,
   totalItems,
   onPageChange,
   onPageSizeChange,
-}: PaginationProps) {
+}) => {
   const pages: (number | "…")[] = [];
+
   for (let i = 1; i <= total; i++) {
     if (i === 1 || i === total || (i >= current - 1 && i <= current + 1)) {
       pages.push(i);
@@ -47,7 +46,6 @@ export default function Pagination({
         Showing {startItem}-{endItem} of {totalItems} results
       </div>
 
-      {/* page buttons */}
       <div className="flex items-center space-x-1">
         <Button
           variant="outline"
@@ -110,4 +108,6 @@ export default function Pagination({
       </div>
     </div>
   );
-}
+};
+
+export default Pagination;
