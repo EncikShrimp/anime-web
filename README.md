@@ -2,9 +2,6 @@
 
 AniWatch is an anime discovery web application built with React, TypeScript, and Vite. It allows users to search for anime, view detailed information about specific anime titles, and explore popular anime.
 
-![AniWatch Screenshot 1](https://raw.githubusercontent.com/EncikShrimp/anime-web/main/public/images/web_view.png)
-![AniWatch Screenshot 2](https://raw.githubusercontent.com/EncikShrimp/anime-web/main/public/images/mobile_view.png)
-
 ## 📚 Features
 
 - **Anime Search**: Search for anime by title with real-time results
