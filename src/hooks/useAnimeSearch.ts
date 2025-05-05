@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useDebounce } from "./useDebounce";
 import { searchAnime, fetchPopularAnime } from "@/api/jikan";
-import { Anime } from "@/types/api";
+import { Anime } from "@/types/types";
 
 export function useAnimeSearch(initialPageSize = 10) {
   const [query, setQuery] = useState("");

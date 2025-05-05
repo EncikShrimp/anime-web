@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { AnimeDetail } from "@/types/api";
+import { AnimeDetail } from "@/types/types";
 import { updateMetadata } from "@/lib/meta";
 
 export function useAnimeMetadata(

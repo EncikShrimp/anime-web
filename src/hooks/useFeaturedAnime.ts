@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Anime } from "@/types/api";
+import { Anime } from "@/types/types";
 
 export function useFeaturedAnime(
   results: Anime[],

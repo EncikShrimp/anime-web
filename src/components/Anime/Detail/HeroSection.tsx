@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { AnimeDetail } from "@/types/api";
+import { useCallback, useState } from "react";
+import { AnimeDetail } from "@/types/types";
 
 interface Props {
   anime: AnimeDetail;

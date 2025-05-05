@@ -1,4 +1,4 @@
-import { Anime } from "@/types/api";
+import { Anime } from "@/types/types";
 import { useNavigate } from "react-router";
 
 interface Props {

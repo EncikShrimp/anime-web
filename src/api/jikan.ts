@@ -1,4 +1,4 @@
-import { AnimeDetail, SearchResult } from "@/types/api";
+import { AnimeDetail, SearchResult } from "@/types/types";
 
 const API_DELAY = 300;
 let lastRequestTime = 0;

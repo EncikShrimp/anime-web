@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";

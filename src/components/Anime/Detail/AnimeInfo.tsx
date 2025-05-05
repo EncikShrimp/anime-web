@@ -1,5 +1,4 @@
-import React from "react";
-import { AnimeDetail } from "@/types/api";
+import { AnimeDetail } from "@/types/types";
 import GenreTag from "@/components/Anime/GenreTag";
 
 interface Props {

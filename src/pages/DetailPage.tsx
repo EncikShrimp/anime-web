@@ -12,10 +12,6 @@ import {
 } from "@/components";
 
 const DetailPage: React.FC = () => {
-  useEffect(() => {
-    window.scrollTo(0, 1000);
-  }, []);
-
   const { id } = useParams<{ id: string }>();
   const { anime, loading, error } = useAnimeDetail(id);
   useAnimeMetadata(anime);
@@ -23,6 +19,10 @@ const DetailPage: React.FC = () => {
   if (error === "NOT_FOUND") {
     return <AnimeNotFound />;
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 1000);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">

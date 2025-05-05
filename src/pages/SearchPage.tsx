@@ -11,10 +11,6 @@ import {
 } from "@/components";
 
 const SearchPage: React.FC = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const {
     query,
     setQuery,
@@ -50,6 +46,10 @@ const SearchPage: React.FC = () => {
     },
     [setPageSize, setPage]
   );
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">

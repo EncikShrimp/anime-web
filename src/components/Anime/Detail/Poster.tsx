@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { AnimeDetail } from "@/types/api";
+import { useCallback, useState } from "react";
+import { AnimeDetail } from "@/types/types";
 import { Button } from "@/components/ui/button";
 import StatItem from "./StatItem";
 import { useNavigate } from "react-router";
@@ -8,7 +8,7 @@ interface Props {
   anime: AnimeDetail;
 }
 
-const AnimePoster: React.FC<Props> = ({ anime }) => {
+const Poster: React.FC<Props> = ({ anime }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const navigate = useNavigate();
 
@@ -89,4 +89,4 @@ const AnimePoster: React.FC<Props> = ({ anime }) => {
   );
 };
 
-export default AnimePoster;
+export default Poster;

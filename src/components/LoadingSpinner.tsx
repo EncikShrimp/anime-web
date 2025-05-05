@@ -1,6 +1,5 @@
 import Lottie from "lottie-react";
 import loadingAnimation from "@/assets/lottie/loading.json";
-import React from "react";
 
 const LoadingSpinner: React.FC = () => {
   return (

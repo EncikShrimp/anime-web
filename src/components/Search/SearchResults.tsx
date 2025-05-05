@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Anime } from "@/types/api";
+import { Anime } from "@/types/types";
 import { AnimeCard } from "@/components/Anime";
 import NoResultsFound from "./NoResultsFound";
 
